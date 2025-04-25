@@ -1,0 +1,35 @@
+{
+  "name": "whatsapp-status-automation",
+  "version": "1.0.0",
+  "description": "Automatisation de la création de statuts WhatsApp via WhatsApp Cloud API et OpenAI",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "openai": "^4.0.0"
+  },
+  "whatsappStatusFlow": {
+    "steps": [
+      {
+        "step": 1,
+        "action": "Charger les variables d'environnement depuis .env (dotenv.config())"
+      },
+      {
+        "step": 2,
+        "action": "Générer le texte du statut via OpenAI"
+      },
+      {
+        "step": 3,
+        "action": "Envoyer le statut à WhatsApp via Cloud API (POST https://graph.facebook.com/v18.0/{{BUSINESS_ID}}/messages)"
+      }
+    ]
+  },
+  "envVariables": [
+    "ACCESS_TOKEN : Token d'accès WhatsApp Cloud",
+    "PHONE_NUMBER : Numéro destinataire (format international, ex. '+33...')",
+    "BUSINESS_ID : ID de ton compte WhatsApp Business",
+    "OPENAI_API_KEY : Clef API OpenAI"
+  ]
+}
