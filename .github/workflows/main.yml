@@ -1,0 +1,31 @@
+name: 🚀 Envoyer statut WhatsApp
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  send-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout du code
+        uses: actions/checkout@v3
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: 📦 Installer les dépendances
+        run: npm ci
+
+      - name: 🔐 Exporter les secrets
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BUSINESS_ID: ${{ secrets.BUSINESS_ID }}
+          PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: echo "Secrets chargés"
+
+      - name: 🚀 Lancer l’envoi du statut
+        run: npm start
